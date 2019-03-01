@@ -25,6 +25,9 @@
     <div id="container">
         <h3>Add Customer</h3>
         <form:form action="saveCustomer" modelAttribute="customer" method="post">
+            <!-- Associate data with customer id -->
+            <form:hidden path="id"/>
+
             <table>
                 <tbody>
                 <tr>

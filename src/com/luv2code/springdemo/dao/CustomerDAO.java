@@ -5,9 +5,13 @@ import com.luv2code.springdemo.entity.Customer;
 import java.util.List;
 
 public interface CustomerDAO {
-    public List<Customer> getCustomers();
+    List<Customer> getCustomers();
 
-    public void saveCustomer(Customer theCustomer);
+    void saveCustomer(Customer theCustomer);
 
-    public Customer getCustomer(int theId);
+    Customer getCustomer(int theId);
+
+    void deleteCustomer(int id);
+
+    List<Customer> searchCustomers(String theSearchName);
 }

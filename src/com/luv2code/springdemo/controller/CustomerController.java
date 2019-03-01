@@ -51,4 +51,20 @@ public class CustomerController {
         customerService.saveCustomer(theCustomer);
         return "redirect:/customer/list";
     }
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam("customerId") int id){
+        // delete the customer
+        this.customerService.deleteCustomer(id);
+        return "redirect:/customer/list";
+    }
+
+    @GetMapping("/search")
+    public String searchCustomers(
+            @RequestParam("theSearchName") String theSearchName, Model model){
+        // search curstomers from the customerService
+        List<Customer> customers = this.customerService.searchCustomers(theSearchName);
+        // add customers to the model
+        model.addAttribute("customers",customers);
+        return "list-customers";
+    }
 }
