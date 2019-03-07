@@ -50,6 +50,7 @@ public class CRMLoggingAspect {
         // display method we are returning from
         String method = joinPoint.getSignature().toShortString();
         myLogger.info(">> @AfterReturning: calling method: " + method);
+
         // display data returned
         if(result != null)
             myLogger.info(">> @AfterReturning: method return data: " + result);
