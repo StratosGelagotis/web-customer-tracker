@@ -7,6 +7,7 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,6 +15,15 @@
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css"/>
+
+    <!-- Reference Bootstrap files -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <div id="wrapper">
@@ -23,10 +33,12 @@
     </div>
     <div id="container">
         <div id="content">
-            <!--  put new button "Add Customer" -->
-            <input type="button" value="Add Customer"
-                   onclick="window.location.href='showFormForAdd'; return false"
-                   class="add-button" />
+            <security:authorize access="hasAnyRole('MANAGER','ADMIN')" >
+                <!--  put new button "Add Customer" -->
+                <input type="button" value="Add Customer"
+                       onclick="window.location.href='showFormForAdd'; return false"
+                       class="add-button" />
+            </security:authorize>
             <!-- Put new search field here -->
             <form:form action="search" method="get">
                 Search customer:
@@ -58,11 +70,15 @@
                         <td>${tempCustomer.email}</td>
                         <!-- display the update link -->
                         <td>
+                            <security:authorize access="hasAnyRole('MANAGER','ADMIN')" >
                             <a href="${updateLink}">Update</a>
-                            |
-                            <a href="${deleteLink}"
-                               onclick="return confirm('Are you sure you want to delete this customer?');">
-                                Delete</a>
+                            </security:authorize>
+                            <security:authorize access="hasAnyRole('ADMIN')" >
+                                |
+                                <a href="${deleteLink}"
+                                   onclick="return confirm('Are you sure you want to delete this customer?');">
+                                    Delete</a>
+                            </security:authorize>
 
                         </td>
                     </tr>
@@ -70,6 +86,11 @@
             </table>
         </div>
     </div>
+    <br>
+    <%-- Add Logout button--%>
+    <form:form action="${pageContext.request.contextPath}/logout" method="post">
+        <input type="submit" value="Logout" class="add-button"/>
+    </form:form>
 
 </body>
 </html>
