@@ -139,7 +139,7 @@
     </dependencies>
 
     <build>
-        <finalName>web-customer-tracker-with-maven</finalName>
+        <finalName>web-customer-tracker-mvn</finalName>
         <!--<sourceDirectory>/src/main/com.luv2code</sourceDirectory>-->
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
@@ -177,6 +177,20 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <configuration>
+                        <modules>
+                            <webModule>
+                                <groupId>artifactGroupId</groupId>
+                                <artifactId>artifactId</artifactId>
+                                <contextRoot>/web-customer-tracker-mvn</contextRoot>
+                            </webModule>
+                        </modules>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
