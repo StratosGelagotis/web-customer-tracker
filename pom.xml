@@ -24,7 +24,7 @@
         <hibernate.version>5.4.1.Final</hibernate.version>
         <mysql.connector.version>8.0.15</mysql.connector.version>
         <c3po.version>0.9.5.3</c3po.version>
-        <springframework.version>5.1.13.RELEASE</springframework.version>
+        <springframework.version>5.2.20.RELEASE</springframework.version>
         <springsecurity.version>5.1.4.RELEASE </springsecurity.version>
     </properties>
 
